@@ -98,22 +98,23 @@
             <h3>Procurement History</h3>
             <table>
               <thead><tr><th>Date</th><th>Produce</th><th>Type</th><th>Tonnage</th><th>Cost (UGX)</th><th>Dealer</th><th>Branch</th></tr></thead>
-              <tbody><tr><td>2026-02-22</td><td>Soybeans Grade A</td><td>Soybeans</td><td>3,000 kg</td><td>7,200,000</td><td>KGL Farm Matugga</td><td>Matugga</td></tr></tbody>
+              <tbody id="procurement-table-body"><tr><td colspan="7">Loading...</td></tr></tbody>
             </table>
           </section>
 
           <section id="new-procurement-form" class="procurement-card procurement-entry-card" hidden>
             <h3>Record New Procurement</h3>
-            <form id="procurement-form" class="procurement-form" onsubmit="event.preventDefault(); alert('Procurement saved successfully.');">
+            <form id="procurement-form" class="procurement-form">
               <div class="field"><label for="produceName">Produce Name *</label><input id="produceName" type="text" placeholder="e.g. Beans K132" required></div>
               <div class="field"><label for="produceType">Produce Type *</label><select id="produceType" required><option value="">Select type</option><option>Beans</option><option>Soybeans</option><option>Grain Maize</option><option>G-Nuts</option><option>Cow Peas</option></select></div>
               <div class="field"><label for="tonnage">Tonnage (kg) *</label><input id="tonnage" type="number" min="1000" placeholder="Min 1000" required></div>
-              <div class="field"><label for="cost">Cost (UGX) *</label><input id="cost" type="number" min="1" placeholder="e.g. 5000000" required></div>
+              <div class="field"><label for="cost">Cost (UGX) *</label><input id="cost" type="number" min="10000" placeholder="e.g. 5000000" required></div>
               <div class="field"><label for="dealerName">Dealer Name *</label><input id="dealerName" type="text" placeholder="Dealer name" required></div>
               <div class="field"><label for="branch">Branch *</label><select id="branch" required><option selected>Matugga</option><option>Maganjo</option></select></div>
               <div class="field"><label for="contact">Contact *</label><input id="contact" type="text" placeholder="+256XXXXXXXXX" required></div>
               <div class="field"><label for="price">Selling Price/kg (UGX) *</label><input id="price" type="number" min="1" placeholder="e.g. 35000" required></div>
               <div class="form-actions"><button id="cancel-procurement-btn" class="cancel-btn" type="button">Cancel</button><button class="save-btn" type="submit">Save Procurement</button></div>
+              <p id="procurement-msg" style="margin-top:0.5rem;font-weight:600;" hidden></p>
             </form>
           </section>
         </section>
@@ -215,6 +216,82 @@
       procurementForm.reset();
       procurementFormCard.hidden = true;
       procurementHistory.hidden = false;
+    });
+
+    async function loadProcurements() {
+      const tbody = document.getElementById("procurement-table-body");
+      try {
+        const token = localStorage.getItem("token") || sessionStorage.getItem("token");
+        const res = await fetch("/api/procurement/procurement", {
+          headers: { "Authorization": "Bearer " + token }
+        });
+        const data = await res.json();
+        const records = Array.isArray(data) ? data : [];
+        if (records.length === 0) {
+          tbody.innerHTML = '<tr><td colspan="7">No procurement records found.</td></tr>';
+          return;
+        }
+        tbody.innerHTML = records.map(function (r) {
+          const date = new Date(r.procurementDate).toISOString().split("T")[0];
+          return '<tr><td>' + date + '</td><td>' + r.produceName + '</td><td>' + r.produceType + '</td><td>' + r.tonnageKg.toLocaleString() + ' kg</td><td>' + r.costUGX.toLocaleString() + '</td><td>' + r.dealerName + '</td><td>' + r.branchName + '</td></tr>';
+        }).join("");
+      } catch (err) {
+        tbody.innerHTML = '<tr><td colspan="7">Failed to load records.</td></tr>';
+      }
+    }
+    loadProcurements();
+
+    procurementForm.addEventListener("submit", async function (event) {
+      event.preventDefault();
+      const msg = document.getElementById("procurement-msg");
+      msg.hidden = true;
+
+      const payload = {
+        produceName: document.getElementById("produceName").value.trim(),
+        produceType: document.getElementById("produceType").value,
+        tonnageKg: Number(document.getElementById("tonnage").value),
+        costUGX: Number(document.getElementById("cost").value),
+        dealerName: document.getElementById("dealerName").value.trim(),
+        branchName: document.getElementById("branch").value,
+        dealerContact: document.getElementById("contact").value.trim(),
+        sellingPricePerKg: Number(document.getElementById("price").value),
+        procurementDate: new Date().toISOString()
+      };
+
+      try {
+        const token = localStorage.getItem("token") || sessionStorage.getItem("token");
+        const res = await fetch("/api/procurement/procurement", {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+            "Authorization": "Bearer " + token
+          },
+          body: JSON.stringify(payload)
+        });
+
+        const data = await res.json();
+
+        if (res.ok) {
+          msg.textContent = "Procurement recorded successfully!";
+          msg.style.color = "green";
+          msg.hidden = false;
+          procurementForm.reset();
+          setTimeout(function () {
+            procurementFormCard.hidden = true;
+            procurementHistory.hidden = false;
+            msg.hidden = true;
+            loadProcurements();
+          }, 1500);
+        } else {
+          msg.textContent = data.details || data.error || "Failed to save procurement.";
+          msg.style.color = "red";
+          msg.hidden = false;
+        }
+      } catch (err) {
+        msg.textContent = "Network error. Please try again.";
+        msg.style.color = "red";
+        msg.hidden = false;
+      }
     });
   </script>
 </body>

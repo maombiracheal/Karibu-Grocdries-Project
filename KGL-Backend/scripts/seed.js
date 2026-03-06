@@ -48,10 +48,7 @@ const users = [
 
 async function seedUsers() {
   try {
-    await mongoose.connect(mongoUri, {
-      useNewUrlParser: true,
-      useUnifiedTopology: true,
-    });
+    await mongoose.connect(mongoUri);
 
     for (const entry of users) {
       const hashedPassword = await bcrypt.hash(entry.password, 10);
