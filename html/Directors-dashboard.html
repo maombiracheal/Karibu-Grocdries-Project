@@ -1,0 +1,303 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Director Overview - Karibu Groceries</title>
+  <link rel="stylesheet" href="/styles/director.css">
+</head>
+<body>
+  <div class="layout">
+    <aside class="sidebar">
+      <div class="sidebar-inner">
+        <div class="brand">
+          <div class="brand-icon">
+            <svg viewBox="0 0 24 24" aria-hidden="true">
+              <path d="M12 3 4.5 7 12 11 19.5 7 12 3Z"></path>
+              <path d="M4.5 7v10L12 21l7.5-4V7"></path>
+              <path d="M12 11v10"></path>
+            </svg>
+          </div>
+          <div>
+            <h1>Karibu Groceries</h1>
+            <p>Wholesale Distributor</p>
+          </div>
+        </div>
+
+        <div class="menu-title">FULL SYSTEM ACCESS</div>
+
+        <nav>
+          <a class="nav-item" href="#" data-panel="dashboard">
+            <svg viewBox="0 0 24 24" aria-hidden="true"><rect x="3" y="3" width="7" height="7" rx="1"></rect><rect x="14" y="3" width="7" height="7" rx="1"></rect><rect x="3" y="14" width="7" height="7" rx="1"></rect><rect x="14" y="14" width="7" height="7" rx="1"></rect></svg>
+            <span>Dashboard</span>
+          </a>
+          <a class="nav-item" href="#" data-panel="branches">
+            <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M2 12s4-6 10-6 10 6 10 6-4 6-10 6S2 12 2 12Z"></path><circle cx="12" cy="12" r="3"></circle></svg>
+            <span>All Branches</span>
+          </a>
+          <a class="nav-item active" href="#" data-panel="users">
+            <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2"></path><circle cx="9" cy="7" r="4"></circle><path d="M22 21v-2a4 4 0 0 0-3-3.87"></path><path d="M16 3.13a4 4 0 0 1 0 7.75"></path></svg>
+            <span>Users</span>
+          </a>
+          <a class="nav-item" href="#" data-panel="reports">
+            <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M3 3v18h18"></path><path d="M8 17V9"></path><path d="M13 17V5"></path><path d="M18 17v-3"></path></svg>
+            <span>Reports</span>
+            
+        
+          </a>
+          <a class="nav-item" href="#" data-panel="analytics">
+            <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"></path><path d="M14 2v6h6"></path><path d="M16 13H8"></path><path d="M16 17H8"></path><path d="M10 9H8"></path></svg>
+            <span>Analytics</span>
+          </a>
+          <a class="nav-item" href="#" data-panel="audit">
+            <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10Z"></path></svg>
+            <span>Audit Logs</span>
+          </a>
+        </nav>
+
+        <div class="sidebar-footer">
+          <p>KGL System v1.0</p>
+          <p>Director Panel</p>
+        </div>
+      </div>
+    </aside>
+
+    <div class="workspace">
+      <header class="topbar">
+        <div class="topbar-title">Users</div>
+        <div class="topbar-user">
+          <div class="avatar">
+            <svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="8" r="4"></circle><path d="M4 20a8 8 0 0 1 16 0"></path></svg>
+          </div>
+          <div>
+            <strong>Mr. Orban</strong>
+            <small>Director</small>
+          </div>
+          <button class="logout-btn" aria-label="Logout" onclick="logoutUser();">
+            <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M16 17l5-5-5-5"></path><path d="M21 12H9"></path><path d="M12 19H5a2 2 0 0 1-2-2V7a2 2 0 0 1 2-2h7"></path></svg>
+          </button>
+        </div>
+      </header>
+
+      <main class="content-area">
+        <section id="panel-dashboard" class="panel">
+          <h2>Director Overview</h2>
+          <p class="subtext">Welcome back, Mr. Orban. Here's your business summary across all branches.</p>
+          <section class="stats-grid">
+            <article class="stat-card"><div class="stat-icon icon-green"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="m5 15 5-5 4 4 5-5"></path><path d="M14 4h5v5"></path></svg></div><div><p class="label">Total Revenue</p><h3>UGX 5,950,000</h3></div></article>
+            <article class="stat-card"><div class="stat-icon icon-blue"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 3 4.5 7 12 11 19.5 7 12 3Z"></path><path d="M4.5 7v10L12 21l7.5-4V7"></path><path d="M12 11v10"></path></svg></div><div><p class="label">Procurement Cost</p><h3>UGX 20,700,000</h3></div></article>
+            <article class="stat-card"><div class="stat-icon icon-green"><svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="9" cy="21" r="1"></circle><circle cx="20" cy="21" r="1"></circle><path d="M1 1h4l2.68 12.39A2 2 0 0 0 9.64 15H19a2 2 0 0 0 1.95-1.57L23 6H6"></path></svg></div><div><p class="label">Total Sales</p><h3>3</h3></div></article>
+            <article class="stat-card"><div class="stat-icon icon-amber"><svg viewBox="0 0 24 24" aria-hidden="true"><rect x="2" y="5" width="20" height="14" rx="2"></rect><path d="M2 10h20"></path></svg></div><div><p class="label">Credit Outstanding</p><h3>UGX 4,500,000</h3></div></article>
+            <article class="stat-card"><div class="stat-icon icon-green"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 20h16"></path><path d="M6 20V7l6-3 6 3v13"></path><path d="M10 11h4"></path><path d="M10 15h4"></path></svg></div><div><p class="label">Total Stock</p><h3>37,200 kg</h3></div></article>
+            <article class="stat-card"><div class="stat-icon icon-red"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M10.29 3.86 1.82 18A2 2 0 0 0 3.53 21h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0Z"></path><path d="M12 9v4"></path><path d="M12 17h.01"></path></svg></div><div><p class="label">Low Stock Items</p><h3>1</h3></div></article>
+          </section>
+          <section class="branch-grid">
+            <article class="branch-card"><h4>Maganjo Branch</h4><div class="row"><span>Total Sales</span><strong>UGX 3,550,000</strong></div><div class="row"><span>Stock Available</span><strong>18,200 kg</strong></div><div class="row"><span>Credit Outstanding</span><strong class="warning">UGX 2,500,000</strong></div></article>
+            <article class="branch-card"><h4>Matugga Branch</h4><div class="row"><span>Total Sales</span><strong>UGX 2,400,000</strong></div><div class="row"><span>Stock Available</span><strong>19,000 kg</strong></div><div class="row"><span>Credit Outstanding</span><strong class="warning">UGX 2,000,000</strong></div></article>
+          </section>
+          <section class="activity-card">
+            <h4>Recent Activity</h4>
+            <article class="activity-item"><div class="activity-main"><span class="activity-dot"></span><div><h5>Procurement Recorded</h5><p>2000kg Beans K132 procured from Mukasa Traders</p></div></div><div class="activity-meta"><time datetime="2026-02-20T08:35">2026-02-20 08:35</time><p>James Mukasa</p></div></article>
+            <article class="activity-item"><div class="activity-main"><span class="activity-dot"></span><div><h5>Sale Recorded</h5><p>500kg Beans K132 sold to Mama Joyce Store</p></div></div><div class="activity-meta"><time datetime="2026-02-23T09:05">2026-02-23 09:05</time><p>Peter Ochieng</p></div></article>
+            <article class="activity-item"><div class="activity-main"><span class="activity-dot"></span><div><h5>Credit Sale Created</h5><p>1000kg Beans K132 on credit to John Okello</p></div></div><div class="activity-meta"><time datetime="2026-02-20T14:00">2026-02-20 14:00</time><p>Peter Ochieng</p></div></article>
+            <article class="activity-item"><div class="activity-main"><span class="activity-dot"></span><div><h5>Procurement Recorded</h5><p>3000kg Soybeans Grade A from KGL Farm</p></div></div><div class="activity-meta"><time datetime="2026-02-22T14:20">2026-02-22 14:20</time><p>Sarah Nambi</p></div></article>
+            <article class="activity-item activity-item-last"><div class="activity-main"><span class="activity-dot"></span><div><h5>Sale Recorded</h5><p>800kg Soybeans sold to Green Valley Foods</p></div></div><div class="activity-meta"><time datetime="2026-02-24T10:05">2026-02-24 10:05</time><p>David Ssempa</p></div></article>
+          </section>
+        </section>
+
+        <section id="panel-branches" class="panel">
+          <h2>All Branches</h2>
+          <p class="subtext">Aggregated view across Maganjo and Matugga.</p>
+          <section class="branches-detail-card"><h4>Maganjo Branch</h4><p class="detail-subhead">Stock Levels</p><table class="branches-table"><thead><tr><th>Produce</th><th>Type</th><th>Quantity (kg)</th><th>Price/kg (UGX)</th></tr></thead><tbody><tr><td>Beans K132</td><td>Beans</td><td>5,000</td><td>3,500</td></tr><tr><td>Beans Nambale</td><td>Beans</td><td>3,200</td><td>3,200</td></tr><tr><td>Grain Maize White</td><td>Grain Maize</td><td>8,000</td><td>1,800</td></tr><tr><td>Cow Peas Local</td><td>Cow Peas</td><td>2,000</td><td>4,000</td></tr></tbody></table><div class="summary-grid"><div class="summary-box"><p>Total Sales</p><strong>UGX 3,550,000</strong></div><div class="summary-box"><p>Total Stock</p><strong>18,200 kg</strong></div><div class="summary-box"><p>Credit Due</p><strong class="warning">UGX 2,500,000</strong></div></div></section>
+          <section class="branches-detail-card"><h4>Matugga Branch</h4><p class="detail-subhead">Stock Levels</p><table class="branches-table"><thead><tr><th>Produce</th><th>Type</th><th>Quantity (kg)</th><th>Price/kg (UGX)</th></tr></thead><tbody><tr><td>G-Nuts Red</td><td>G-Nuts</td><td>1,500</td><td>7,000</td></tr><tr><td>Soybeans Grade A</td><td>Soybeans</td><td>4,500</td><td>3,000</td></tr><tr><td>Beans K132</td><td>Beans</td><td>6,000</td><td>3,500</td></tr><tr><td>Grain Maize Yellow</td><td>Grain Maize</td><td>7,000</td><td>2,000</td></tr></tbody></table><div class="summary-grid"><div class="summary-box"><p>Total Sales</p><strong>UGX 2,400,000</strong></div><div class="summary-box"><p>Total Stock</p><strong>19,000 kg</strong></div><div class="summary-box"><p>Credit Due</p><strong class="warning">UGX 2,000,000</strong></div></div></section>
+        </section>
+        <!-----------USERS------------>
+
+        <section id="panel-users" class="panel active">
+          <h2>Manage Users</h2>
+          <p class="subtext">System users across all branches.</p>
+          <section class="users-card">
+            <form id="add-user-form" class="add-user-form">
+              <div class="add-user-grid">
+                <label>
+                  <span>Name</span>
+                  <input id="new-user-name" type="text" required placeholder="Enter full name">
+                </label>
+                <label>
+                  <span>Role</span>
+                  <select id="new-user-role" required>
+                    <option value="director">Director</option>
+                    <option value="manager">Manager</option>
+                    <option value="agent" selected>Agent</option>
+                  </select>
+                </label>
+                <label>
+                  <span>Branch</span>
+                  <select id="new-user-branch" required>
+                    <option value="All Branches">All Branches</option>
+                    <option value="Maganjo">Maganjo</option>
+                    <option value="Matugga">Matugga</option>
+                  </select>
+                </label>
+              </div>
+              <button type="submit" class="add-user-btn">Add User</button>
+            </form>
+            <table class="users-table">
+              <thead><tr><th>Name</th><th>Role</th><th>Branch</th><th>Status</th><th>Actions</th></tr></thead>
+              <tbody id="users-table-body">
+                <tr><td><strong>Mr. Orban</strong></td><td><span class="role-pill role-director">Director</span></td><td>All Branches</td><td><span class="status-pill status-active">Active</span></td><td><button type="button" class="delete-user-btn">Delete</button></td></tr>
+                <tr><td><strong>James Mukasa</strong></td><td><span class="role-pill role-manager">Manager</span></td><td>Maganjo</td><td><span class="status-pill status-active">Active</span></td><td><button type="button" class="delete-user-btn">Delete</button></td></tr>
+                <tr><td><strong>Sarah Nambi</strong></td><td><span class="role-pill role-manager">Manager</span></td><td>Matugga</td><td><span class="status-pill status-active">Active</span></td><td><button type="button" class="delete-user-btn">Delete</button></td></tr>
+                <tr><td><strong>Peter Ochieng</strong></td><td><span class="role-pill role-agent">Agent</span></td><td>Maganjo</td><td><span class="status-pill status-active">Active</span></td><td><button type="button" class="delete-user-btn">Delete</button></td></tr>
+                <tr><td><strong>Grace Auma</strong></td><td><span class="role-pill role-agent">Agent</span></td><td>Maganjo</td><td><span class="status-pill status-active">Active</span></td><td><button type="button" class="delete-user-btn">Delete</button></td></tr>
+                <tr><td><strong>David Ssempa</strong></td><td><span class="role-pill role-agent">Agent</span></td><td>Matugga</td><td><span class="status-pill status-active">Active</span></td><td><button type="button" class="delete-user-btn">Delete</button></td></tr>
+                <tr><td><strong>Rose Namutebi</strong></td><td><span class="role-pill role-agent">Agent</span></td><td>Matugga</td><td><span class="status-pill status-active">Active</span></td><td><button type="button" class="delete-user-btn">Delete</button></td></tr>
+              </tbody>
+            </table>
+          </section>
+        </section>
+        <!------------REPORTS----------->
+
+        <section id="panel-reports" class="panel">
+          <h2>Reports</h2>
+          <p class="subtext">Business performance summaries.</p>
+          <section class="reports-table-card">
+            <h4>Produce Performance</h4>
+            <table class="reports-table">
+              <thead><tr><th>Produce Type</th><th>Procured (kg)</th><th>Sold (kg)</th><th>Revenue (UGX)</th><th>Cost (UGX)</th><th>Margin (UGX)</th></tr></thead>
+              <tbody>
+                <tr><td><strong>Beans</strong></td><td>2,000</td><td>500</td><td>1,750,000</td><td>6,000,000</td><td><span class="negative">-4,250,000</span></td></tr>
+                <tr><td><strong>Grain Maize</strong></td><td>5,000</td><td>1,000</td><td>1,800,000</td><td>7,500,000</td><td><span class="negative">-5,700,000</span></td></tr>
+                <tr><td><strong>Cow Peas</strong></td><td>0</td><td>0</td><td>0</td><td>0</td><td><span class="positive">0</span></td></tr>
+                <tr><td><strong>G-Nuts</strong></td><td>0</td><td>0</td><td>0</td><td>0</td><td><span class="positive">0</span></td></tr>
+                <tr><td><strong>Soybeans</strong></td><td>3,000</td><td>800</td><td>2,400,000</td><td>7,200,000</td><td><span class="negative">-4,800,000</span></td></tr>
+              </tbody>
+            </table>
+          </section>
+          <section class="summary-grid reports-summary-grid">
+            <div class="summary-box report-total-box"><p>Total Revenue</p><strong>UGX 5,950,000</strong></div>
+            <div class="summary-box report-total-box"><p>Total Procurement Cost</p><strong>UGX 20,700,000</strong></div>
+            <div class="summary-box report-total-box"><p>Outstanding Credit</p><strong class="warning">UGX 4,500,000</strong></div>
+          </section>
+        </section>
+
+        <!--ANALYTICS-->
+
+        <section id="panel-analytics" class="panel">
+          <h2>Analytics</h2>
+          <p class="subtext">Key business metrics and trends.</p>
+          <section class="analytics-metrics-grid">
+            <article class="analytics-metric-card"><p>Gross Revenue</p><strong>UGX 5,950,000</strong></article>
+            <article class="analytics-metric-card"><p>Total Cost</p><strong>UGX 20,700,000</strong></article>
+            <article class="analytics-metric-card"><p>Gross Margin</p><strong class="metric-negative">UGX -14,750,000</strong></article>
+            <article class="analytics-metric-card"><p>Margin %</p><strong>-247.9%</strong></article>
+          </section>
+          <section class="analytics-summary-grid">
+            <article class="analytics-summary-card"><h4>Procurement Summary</h4><div class="analytics-row"><span>Total Entries</span><strong>3</strong></div><div class="analytics-row"><span>Total Procured</span><strong>10,000 kg</strong></div><div class="analytics-row analytics-row-last"><span>Avg. Cost/kg</span><strong>UGX 2,070</strong></div></article>
+            <article class="analytics-summary-card"><h4>Sales Summary</h4><div class="analytics-row"><span>Total Transactions</span><strong>3</strong></div><div class="analytics-row"><span>Total Sold</span><strong>2,300 kg</strong></div><div class="analytics-row analytics-row-last"><span>Avg. Price/kg</span><strong>UGX 2,587</strong></div></article>
+          </section>
+        </section>
+
+        <!--AUDIT LOGS-->
+
+        <section id="panel-audit" class="panel">
+          <h2>Audit Logs</h2>
+          <p class="subtext">Complete activity trail across all branches.</p>
+          <section class="audit-card">
+            <table class="audit-table">
+              <thead><tr><th>Timestamp</th><th>Action</th><th>User</th><th>Role</th><th>Details</th></tr></thead>
+              <tbody>
+                <tr><td>2026-02-20 08:35</td><td><strong>Procurement Recorded</strong></td><td>James Mukasa</td><td><span class="role-pill role-manager">Manager</span></td><td class="audit-detail">2000kg Beans K132 procured from Mukasa Traders</td></tr>
+                <tr><td>2026-02-23 09:05</td><td><strong>Sale Recorded</strong></td><td>Peter Ochieng</td><td><span class="role-pill role-agent">Agent</span></td><td class="audit-detail">500kg Beans K132 sold to Mama Joyce Store</td></tr>
+                <tr><td>2026-02-20 14:00</td><td><strong>Credit Sale Created</strong></td><td>Peter Ochieng</td><td><span class="role-pill role-agent">Agent</span></td><td class="audit-detail">1000kg Beans K132 on credit to John Okello</td></tr>
+                <tr><td>2026-02-22 14:20</td><td><strong>Procurement Recorded</strong></td><td>Sarah Nambi</td><td><span class="role-pill role-manager">Manager</span></td><td class="audit-detail">3000kg Soybeans Grade A from KGL Farm</td></tr>
+                <tr><td>2026-02-24 10:05</td><td><strong>Sale Recorded</strong></td><td>David Ssempa</td><td><span class="role-pill role-agent">Agent</span></td><td class="audit-detail">800kg Soybeans sold to Green Valley Foods</td></tr>
+              </tbody>
+            </table>
+          </section>
+        </section>
+      </main>
+    </div>
+  </div>
+
+  <script>
+    function logoutUser() {
+      localStorage.removeItem('token');
+      localStorage.removeItem('user');
+      sessionStorage.removeItem('token');
+      sessionStorage.removeItem('user');
+      window.location.replace('/login.html');
+    }
+
+    const navItems = document.querySelectorAll('.nav-item[data-panel]');
+    const panels = document.querySelectorAll('.panel');
+    const topbarTitle = document.querySelector('.topbar-title');
+    const addUserForm = document.getElementById('add-user-form');
+    const usersTableBody = document.getElementById('users-table-body');
+    const roleLabelByKey = {
+      director: 'Director',
+      manager: 'Manager',
+      agent: 'Agent'
+    };
+
+    function activatePanel(panelKey) {
+      navItems.forEach((n) => n.classList.toggle('active', n.getAttribute('data-panel') === panelKey));
+      panels.forEach((panel) => {
+        panel.classList.toggle('active', panel.id === `panel-${panelKey}`);
+      });
+      if (topbarTitle) {
+        topbarTitle.textContent = panelKey.charAt(0).toUpperCase() + panelKey.slice(1);
+      }
+    }
+
+    navItems.forEach((item) => {
+      item.addEventListener('click', (event) => {
+        event.preventDefault();
+        const panelKey = item.getAttribute('data-panel');
+        activatePanel(panelKey);
+      });
+    });
+
+    if (addUserForm && usersTableBody) {
+      addUserForm.addEventListener('submit', (event) => {
+        event.preventDefault();
+        const nameInput = document.getElementById('new-user-name');
+        const roleInput = document.getElementById('new-user-role');
+        const branchInput = document.getElementById('new-user-branch');
+
+        const name = nameInput.value.trim();
+        const roleKey = roleInput.value;
+        const roleLabel = roleLabelByKey[roleKey] || 'Agent';
+        const branch = branchInput.value;
+
+        if (!name) {
+          return;
+        }
+
+        const row = document.createElement('tr');
+        row.innerHTML = `
+          <td><strong>${name}</strong></td>
+          <td><span class="role-pill role-${roleKey}">${roleLabel}</span></td>
+          <td>${branch}</td>
+          <td><span class="status-pill status-active">Active</span></td>
+          <td><button type="button" class="delete-user-btn">Delete</button></td>
+        `;
+        usersTableBody.prepend(row);
+        addUserForm.reset();
+        roleInput.value = 'agent';
+      });
+
+      usersTableBody.addEventListener('click', (event) => {
+        const deleteButton = event.target.closest('.delete-user-btn');
+        if (!deleteButton) {
+          return;
+        }
+        const row = deleteButton.closest('tr');
+        if (row) {
+          row.remove();
+        }
+      });
+    }
+  </script>
+</body>
+</html>

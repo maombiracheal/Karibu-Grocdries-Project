@@ -1,0 +1,221 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Manager Dashboard - Karibu Groceries</title>
+  <link rel="stylesheet" href="/styles/manager.css">
+</head>
+<body>
+  <div class="layout">
+    <aside class="sidebar">
+      <div class="sidebar-inner">
+        <div class="brand">
+          <div class="brand-icon">
+            <svg viewBox="0 0 24 24" aria-hidden="true">
+              <path d="M12 3 4.5 7 12 11 19.5 7 12 3Z"></path>
+              <path d="M4.5 7v10L12 21l7.5-4V7"></path>
+              <path d="M12 11v10"></path>
+            </svg>
+          </div>
+          <div>
+            <h1>Karibu Groceries</h1>
+            <p>Wholesale Distributor</p>
+          </div>
+        </div>
+
+        <div class="menu-title">BRANCH MANAGEMENT</div>
+        <nav>
+          <a class="nav-item active" href="#" data-panel="dashboard"><svg viewBox="0 0 24 24" aria-hidden="true"><rect x="3" y="3" width="7" height="7" rx="1"></rect><rect x="14" y="3" width="7" height="7" rx="1"></rect><rect x="3" y="14" width="7" height="7" rx="1"></rect><rect x="14" y="14" width="7" height="7" rx="1"></rect></svg><span>Dashboard</span></a>
+          <a class="nav-item" href="#" data-panel="procurement"><svg viewBox="0 0 24 24" aria-hidden="true"><rect x="7" y="3" width="10" height="18" rx="2"></rect><path d="M9 7h6"></path><path d="M9 11h6"></path><path d="M9 15h4"></path></svg><span>Procurement</span></a>
+          <a class="nav-item" href="#" data-panel="stock"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M3 7h18"></path><path d="M5 7v13h14V7"></path><path d="M9 12h6"></path><path d="M9 16h6"></path></svg><span>Stock</span></a>
+          <a class="nav-item" href="#" data-panel="reports"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M3 3v18h18"></path><path d="M8 17V9"></path><path d="M13 17V5"></path><path d="M18 17v-3"></path></svg><span>Branch Reports</span></a>
+          <a class="nav-item" href="#" data-panel="sales"><svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="9" cy="20" r="1"></circle><circle cx="18" cy="20" r="1"></circle><path d="M3 4h2l2.4 10.6a2 2 0 0 0 2 1.4h7.6a2 2 0 0 0 2-1.6L21 8H7"></path></svg><span>Sales Monitor</span></a>
+          <a class="nav-item" href="#" data-panel="credit"><svg viewBox="0 0 24 24" aria-hidden="true"><rect x="3" y="6" width="18" height="12" rx="2"></rect><path d="M3 10h18"></path></svg><span>Credit Management</span></a>
+        </nav>
+        <div class="sidebar-footer">
+          <p>KGL System v1.0</p>
+          <p>Manager Panel</p>
+        </div>
+      </div>
+    </aside>
+
+    <div class="workspace">
+      <header class="topbar">
+        <div class="topbar-title">Matugga Branch</div>
+        <div class="topbar-user">
+          <div class="avatar">
+            <svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="8" r="4"></circle><path d="M4 20a8 8 0 0 1 16 0"></path></svg>
+          </div>
+          <div>
+            <strong>Sarah Nambi</strong>
+            <small>Manager</small>
+          </div>
+          <button class="logout-btn" aria-label="Logout" onclick="logoutUser();">
+            <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M16 17l5-5-5-5"></path><path d="M21 12H9"></path><path d="M12 19H5a2 2 0 0 1-2-2V7a2 2 0 0 1 2-2h7"></path></svg>
+          </button>
+        </div>
+      </header>
+
+      <main class="content-area">
+        <section class="panel active" id="panel-dashboard">
+          <h2>Matugga Branch Dashboard</h2>
+          <p class="subtext">Branch management overview</p>
+          <section class="metric-grid">
+            <article class="metric-card"><div class="metric-icon green"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="m5 15 5-5 4 4 5-5"></path><path d="M14 4h5v5"></path></svg></div><div><p>Branch Revenue</p><strong>UGX 2,400,000</strong></div></article>
+            <article class="metric-card"><div class="metric-icon blue"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 3 4.5 7 12 11 19.5 7 12 3Z"></path><path d="M4.5 7v10L12 21l7.5-4V7"></path><path d="M12 11v10"></path></svg></div><div><p>Procurements</p><strong>1</strong></div></article>
+            <article class="metric-card"><div class="metric-icon green-outline"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 20h16"></path><path d="M6 20V7l6-3 6 3v13"></path><path d="M10 11h4"></path><path d="M10 15h4"></path></svg></div><div><p>Stock Items</p><strong>4</strong></div></article>
+            <article class="metric-card"><div class="metric-icon amber"><svg viewBox="0 0 24 24" aria-hidden="true"><rect x="2" y="5" width="20" height="14" rx="2"></rect><path d="M2 10h20"></path></svg></div><div><p>Credit Due</p><strong>UGX 2,000,000</strong></div></article>
+          </section>
+          <section class="alert-card">
+            <div class="alert-left"><div class="alert-title-wrap"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M10.29 3.86 1.82 18A2 2 0 0 0 3.53 21h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0Z"></path><path d="M12 9v4"></path><path d="M12 17h.01"></path></svg><h3>Low Stock Alert</h3></div><p>G-Nuts Red</p></div>
+            <strong>1,500 kg remaining</strong>
+          </section>
+          <section class="stock-card">
+            <h3>Current Stock</h3>
+            <table>
+              <thead><tr><th>Produce</th><th>Type</th><th>Quantity (kg)</th><th>Selling Price/kg</th><th>Value (UGX)</th></tr></thead>
+              <tbody>
+                <tr><td>G-Nuts Red</td><td>G-Nuts</td><td>1,500</td><td>7,000</td><td><strong>10,500,000</strong></td></tr>
+                <tr><td>Soybeans Grade A</td><td>Soybeans</td><td>4,500</td><td>3,000</td><td><strong>13,500,000</strong></td></tr>
+                <tr><td>Beans K132</td><td>Beans</td><td>6,000</td><td>3,500</td><td><strong>21,000,000</strong></td></tr>
+                <tr><td>Grain Maize Yellow</td><td>Grain Maize</td><td>7,000</td><td>2,000</td><td><strong>14,000,000</strong></td></tr>
+              </tbody>
+            </table>
+          </section>
+        </section>
+
+        <section class="panel" id="panel-procurement">
+          <div class="page-head">
+            <div>
+              <h2>Procurement</h2>
+              <p class="subtext">Record and manage produce acquisitions</p>
+            </div>
+            <a id="new-procurement-btn" class="new-procurement-btn" href="#new-procurement-form">+ New Procurement</a>
+          </div>
+
+          <section id="procurement-history" class="procurement-card">
+            <h3>Procurement History</h3>
+            <table>
+              <thead><tr><th>Date</th><th>Produce</th><th>Type</th><th>Tonnage</th><th>Cost (UGX)</th><th>Dealer</th><th>Branch</th></tr></thead>
+              <tbody><tr><td>2026-02-22</td><td>Soybeans Grade A</td><td>Soybeans</td><td>3,000 kg</td><td>7,200,000</td><td>KGL Farm Matugga</td><td>Matugga</td></tr></tbody>
+            </table>
+          </section>
+
+          <section id="new-procurement-form" class="procurement-card procurement-entry-card" hidden>
+            <h3>Record New Procurement</h3>
+            <form id="procurement-form" class="procurement-form" onsubmit="event.preventDefault(); alert('Procurement saved successfully.');">
+              <div class="field"><label for="produceName">Produce Name *</label><input id="produceName" type="text" placeholder="e.g. Beans K132" required></div>
+              <div class="field"><label for="produceType">Produce Type *</label><select id="produceType" required><option value="">Select type</option><option>Beans</option><option>Soybeans</option><option>Grain Maize</option><option>G-Nuts</option><option>Cow Peas</option></select></div>
+              <div class="field"><label for="tonnage">Tonnage (kg) *</label><input id="tonnage" type="number" min="1000" placeholder="Min 1000" required></div>
+              <div class="field"><label for="cost">Cost (UGX) *</label><input id="cost" type="number" min="1" placeholder="e.g. 5000000" required></div>
+              <div class="field"><label for="dealerName">Dealer Name *</label><input id="dealerName" type="text" placeholder="Dealer name" required></div>
+              <div class="field"><label for="branch">Branch *</label><select id="branch" required><option selected>Matugga</option><option>Maganjo</option></select></div>
+              <div class="field"><label for="contact">Contact *</label><input id="contact" type="text" placeholder="+256XXXXXXXXX" required></div>
+              <div class="field"><label for="price">Selling Price/kg (UGX) *</label><input id="price" type="number" min="1" placeholder="e.g. 35000" required></div>
+              <div class="form-actions"><button id="cancel-procurement-btn" class="cancel-btn" type="button">Cancel</button><button class="save-btn" type="submit">Save Procurement</button></div>
+            </form>
+          </section>
+        </section>
+
+        <section class="panel" id="panel-stock">
+          <section class="stock-page-head">
+            <h2>Stock Management</h2>
+            <p class="subtext">Matugga Branch - Total Stock Value: UGX 59,000,000</p>
+          </section>
+          <section class="stock-grid">
+            <article class="stock-item-card"><div class="stock-item-top"><div><h3>G-Nuts Red</h3><p>G-Nuts</p></div><svg class="status-icon status-low" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 3 2 21h20L12 3Z"></path><path d="M12 9v5"></path><path d="M12 17h.01"></path></svg></div><div class="stock-line low"><span>Quantity</span><strong>1,500 kg</strong></div><div class="stock-line"><span>Price/kg</span><strong>UGX 7,000</strong></div><hr class="stock-divider"><div class="stock-line"><span>Total Value</span><strong>UGX 10,500,000</strong></div><p class="stock-item-note">Low stock - notify director</p></article>
+            <article class="stock-item-card"><div class="stock-item-top"><div><h3>Soybeans Grade A</h3><p>Soybeans</p></div><svg class="status-icon status-ok" viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="9"></circle><path d="m8 12 3 3 5-6"></path></svg></div><div class="stock-line"><span>Quantity</span><strong>4,500 kg</strong></div><div class="stock-line"><span>Price/kg</span><strong>UGX 3,000</strong></div><hr class="stock-divider"><div class="stock-line"><span>Total Value</span><strong>UGX 13,500,000</strong></div></article>
+            <article class="stock-item-card"><div class="stock-item-top"><div><h3>Beans K132</h3><p>Beans</p></div><svg class="status-icon status-ok" viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="9"></circle><path d="m8 12 3 3 5-6"></path></svg></div><div class="stock-line"><span>Quantity</span><strong>6,000 kg</strong></div><div class="stock-line"><span>Price/kg</span><strong>UGX 3,500</strong></div><hr class="stock-divider"><div class="stock-line"><span>Total Value</span><strong>UGX 21,000,000</strong></div></article>
+            <article class="stock-item-card"><div class="stock-item-top"><div><h3>Grain Maize Yellow</h3><p>Grain Maize</p></div><svg class="status-icon status-ok" viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="9"></circle><path d="m8 12 3 3 5-6"></path></svg></div><div class="stock-line"><span>Quantity</span><strong>7,000 kg</strong></div><div class="stock-line"><span>Price/kg</span><strong>UGX 2,000</strong></div><hr class="stock-divider"><div class="stock-line"><span>Total Value</span><strong>UGX 14,000,000</strong></div></article>
+          </section>
+        </section>
+
+        <section class="panel" id="panel-reports">
+          <section class="branch-reports-head">
+            <h2>Branch Reports</h2>
+            <p class="subtext">Matugga Branch performance summary</p>
+          </section>
+          <section class="branch-report-kpi-grid">
+            <article class="branch-report-kpi-card"><p>Total Sales</p><strong>UGX 2,400,000</strong></article>
+            <article class="branch-report-kpi-card"><p>Stock Value</p><strong>UGX 59,000,000</strong></article>
+            <article class="branch-report-kpi-card"><p>Credit Outstanding</p><strong class="warning">UGX 2,000,000</strong></article>
+          </section>
+          <section class="branch-report-sales-card">
+            <h3>Sales by Produce</h3>
+            <div class="branch-report-sales-row"><span>Soybeans</span><strong>UGX 2,400,000</strong></div>
+          </section>
+        </section>
+
+        <section class="panel" id="panel-sales">
+          <section class="sales-monitor-head">
+            <h2>Sales Monitor</h2>
+            <p class="subtext">View sales made at Matugga branch.</p>
+          </section>
+          <section class="sales-monitor-card">
+            <table class="sales-monitor-table">
+              <thead><tr><th>Date</th><th>Produce</th><th>Tonnage (kg)</th><th>Amount (UGX)</th><th>Buyer</th><th>Agent</th></tr></thead>
+              <tbody><tr><td>2026-02-24</td><td>Soybeans Grade A</td><td>800</td><td>2,400,000</td><td>Green Valley Foods</td><td>David Ssempa</td></tr></tbody>
+            </table>
+            <div class="sales-monitor-total">Total: UGX 2,400,000</div>
+          </section>
+        </section>
+
+        <section class="panel" id="panel-credit">
+          <section class="credit-management-head">
+            <h2>Credit Management</h2>
+            <p class="subtext">Monitor credit sales at Matugga branch.</p>
+          </section>
+          <section class="credit-management-card">
+            <table class="credit-management-table">
+              <thead><tr><th>Buyer</th><th>Produce</th><th>Amount Due</th><th>Paid</th><th>Balance Due</th><th>Date</th><th>Status</th></tr></thead>
+              <tbody><tr><td>Mary Nakato</td><td>G-Nuts Red</td><td>2,000,000</td><td>0</td><td class="credit-balance">2,000,000</td><td>2026-03-20</td><td><span class="credit-status-pending">pending</span></td></tr></tbody>
+            </table>
+          </section>
+        </section>
+      </main>
+    </div>
+  </div>
+
+  <script>
+    function logoutUser() {
+      localStorage.removeItem('token');
+      localStorage.removeItem('user');
+      sessionStorage.removeItem('token');
+      sessionStorage.removeItem('user');
+      window.location.replace('/login.html');
+    }
+
+    const managerNavItems = document.querySelectorAll('.nav-item[data-panel]');
+    const managerPanels = document.querySelectorAll('.panel');
+    managerNavItems.forEach((item) => {
+      item.addEventListener('click', (event) => {
+        event.preventDefault();
+        const target = item.getAttribute('data-panel');
+        managerNavItems.forEach((n) => n.classList.remove('active'));
+        item.classList.add('active');
+        managerPanels.forEach((panel) => panel.classList.toggle('active', panel.id === `panel-${target}`));
+      });
+    });
+
+    const newProcurementBtn = document.getElementById("new-procurement-btn");
+    const procurementHistory = document.getElementById("procurement-history");
+    const procurementFormCard = document.getElementById("new-procurement-form");
+    const procurementForm = document.getElementById("procurement-form");
+    const cancelProcurementBtn = document.getElementById("cancel-procurement-btn");
+
+    newProcurementBtn.addEventListener("click", function (event) {
+      event.preventDefault();
+      procurementHistory.hidden = true;
+      procurementFormCard.hidden = false;
+      procurementFormCard.scrollIntoView({ behavior: "smooth", block: "start" });
+    });
+
+    cancelProcurementBtn.addEventListener("click", function () {
+      procurementForm.reset();
+      procurementFormCard.hidden = true;
+      procurementHistory.hidden = false;
+    });
+  </script>
+</body>
+</html>
