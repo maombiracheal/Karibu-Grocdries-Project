@@ -40,8 +40,12 @@
       </div>
     </aside>
 
+    <div class="sidebar-overlay" id="sidebar-overlay"></div>
     <div class="workspace">
       <header class="topbar">
+        <button class="menu-toggle" id="menu-toggle" aria-label="Open menu">
+          <svg viewBox="0 0 24 24"><path d="M3 12h18"></path><path d="M3 6h18"></path><path d="M3 18h18"></path></svg>
+        </button>
         <div class="topbar-title">Matugga Branch</div>
         <div class="topbar-user">
           <div class="avatar">
@@ -187,6 +191,20 @@
       window.location.replace('/login.html');
     }
 
+    const sidebar = document.querySelector('.sidebar');
+    const sidebarOverlay = document.getElementById('sidebar-overlay');
+    const menuToggle = document.getElementById('menu-toggle');
+
+    menuToggle.addEventListener('click', function () {
+      sidebar.classList.toggle('open');
+      sidebarOverlay.classList.toggle('open');
+    });
+
+    sidebarOverlay.addEventListener('click', function () {
+      sidebar.classList.remove('open');
+      sidebarOverlay.classList.remove('open');
+    });
+
     const managerNavItems = document.querySelectorAll('.nav-item[data-panel]');
     const managerPanels = document.querySelectorAll('.panel');
     managerNavItems.forEach((item) => {
@@ -196,6 +214,8 @@
         managerNavItems.forEach((n) => n.classList.remove('active'));
         item.classList.add('active');
         managerPanels.forEach((panel) => panel.classList.toggle('active', panel.id === `panel-${target}`));
+        sidebar.classList.remove('open');
+        sidebarOverlay.classList.remove('open');
       });
     });
 

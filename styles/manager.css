@@ -206,6 +206,26 @@ nav {
   padding: 4px;
 }
 
+.menu-toggle {
+  display: none;
+  align-items: center;
+  justify-content: center;
+  width: 40px;
+  height: 40px;
+  border: 0;
+  background: transparent;
+  cursor: pointer;
+}
+
+.menu-toggle svg {
+  width: 24px;
+  height: 24px;
+  stroke: var(--text-strong);
+  fill: none;
+  stroke-width: 2;
+  stroke-linecap: round;
+}
+
 .content-area {
   padding: 28px 28px 24px;
   width: 100%;
@@ -811,18 +831,50 @@ nav {
 
 @media (max-width: 860px) {
   .sidebar {
-    position: static;
-    width: 100%;
-    height: auto;
+    position: fixed;
+    width: 276px;
+    height: 100vh;
+    transform: translateX(-100%);
+    transition: transform 0.3s ease;
+    z-index: 1000;
   }
 
-  .sidebar-inner {
-    height: auto;
+  .sidebar.open {
+    transform: translateX(0);
+  }
+
+  .sidebar-overlay {
+    display: none;
+    position: fixed;
+    inset: 0;
+    background: rgba(0, 0, 0, 0.4);
+    z-index: 999;
+  }
+
+  .sidebar-overlay.open {
+    display: block;
+  }
+
+  .menu-toggle {
+    display: flex;
   }
 
   .workspace {
     margin-left: 0;
     width: 100%;
+  }
+
+  .topbar {
+    padding: 0 16px;
+    height: 64px;
+  }
+
+  .topbar-user strong {
+    font-size: 14px;
+  }
+
+  .topbar-user small {
+    font-size: 12px;
   }
 
   .metric-grid {
@@ -855,6 +907,51 @@ nav {
 
   .form-actions {
     justify-content: flex-start;
+  }
+
+  .procurement-card,
+  .sales-monitor-card,
+  .credit-management-card,
+  .stock-card {
+    overflow-x: auto;
+  }
+
+  .procurement-card table,
+  .sales-monitor-table,
+  .credit-management-table,
+  .stock-card table {
+    min-width: 600px;
+  }
+}
+
+@media (max-width: 480px) {
+  .topbar-title {
+    font-size: 16px;
+  }
+
+  .content-area h2 {
+    font-size: 22px;
+  }
+
+  .subtext {
+    font-size: 14px;
+  }
+
+  .metric-card {
+    padding: 16px;
+    gap: 14px;
+    min-height: 90px;
+  }
+
+  .metric-icon {
+    width: 44px;
+    height: 44px;
+    flex: 0 0 44px;
+  }
+
+  .new-procurement-btn {
+    width: 100%;
+    text-align: center;
   }
 }
   
