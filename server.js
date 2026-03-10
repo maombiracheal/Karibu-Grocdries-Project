@@ -13,6 +13,7 @@ const produceRoutes = require('./KGL-Backend/routes/Stock'); // Stock Management
 const procurementRoutes = require('./KGL-Backend/routes/procurement');
 const salesRoutes = require('./KGL-Backend/routes/Sales');
 const creditSalesRoutes = require('./KGL-Backend/routes/creditSales');
+const paymentRoutes = require('./KGL-Backend/routes/payments');
 const reportRoutes = require('./KGL-Backend/routes/report');
 
 
@@ -41,6 +42,7 @@ app.use('/api/stock', produceRoutes);
 app.use('/api/procurement', procurementRoutes);
 app.use('/api/sales', salesRoutes);
 app.use('/api/credit', creditSalesRoutes);
+app.use('/api/payments', paymentRoutes);
 app.use('/api/reports', reportRoutes);
 
 

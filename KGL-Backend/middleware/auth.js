@@ -1,5 +1,29 @@
 const jwt = require('jsonwebtoken');
 const User = require('../models/User');
+const Branch = require('../models/Branch');
+
+const BRANCH_NAMES = new Set(['Maganjo', 'Matugga']);
+
+const normalizeBranchValue = async (branchValue) => {
+  if (!branchValue) {
+    return branchValue;
+  }
+
+  if (typeof branchValue === 'string' && BRANCH_NAMES.has(branchValue)) {
+    return branchValue;
+  }
+
+  if (typeof branchValue === 'string' && /^[a-f0-9]{24}$/i.test(branchValue)) {
+    const branch = await Branch.findById(branchValue).select('name');
+    return branch ? branch.name : branchValue;
+  }
+
+  if (typeof branchValue === 'object' && branchValue.name && BRANCH_NAMES.has(branchValue.name)) {
+    return branchValue.name;
+  }
+
+  return branchValue;
+};
 
 // 1. Protect: Verifies if the user is logged in
 const protect = async (req, res, next) => {
@@ -16,6 +40,10 @@ const protect = async (req, res, next) => {
 
       // Get user from the token and attach to request
       req.user = await User.findById(decoded.id).select('-password');
+      if (!req.user) {
+        return res.status(401).json({ message: 'Not authorized, user no longer exists' });
+      }
+      req.user.branch = await normalizeBranchValue(req.user.branch);
       return next();
     } catch (error) {
       return res.status(401).json({ message: 'Not authorized, token failed' });
@@ -30,6 +58,10 @@ const protect = async (req, res, next) => {
 // 2. Authorize: Checks if the user has the right Role (Manager/Agent/Director)
 const authorize = (...roles) => {
   return (req, res, next) => {
+    if (!req.user) {
+      return res.status(401).json({ message: 'Not authorized' });
+    }
+
     if (!roles.includes(req.user.role)) {
       return res.status(403).json({ 
         message: `Role ${req.user.role} is not authorized to access this route` 
@@ -39,4 +71,28 @@ const authorize = (...roles) => {
   };
 };
 
-module.exports = { protect, authorize };
+const authorizeDirectorIdentity = (
+  allowedNames = ['mr. orban', 'mr orban'],
+  allowedUsernames = ['orban', 'mr orban']
+) => {
+  return (req, res, next) => {
+    if (!req.user) {
+      return res.status(401).json({ message: 'Not authorized' });
+    }
+
+    const fullName = (req.user.fullName || '').trim().toLowerCase();
+    const username = (req.user.username || '').trim().toLowerCase();
+    const isAllowedDirector =
+      allowedNames.includes(fullName) || allowedUsernames.includes(username);
+
+    if (!isAllowedDirector) {
+      return res.status(403).json({
+        message: 'Only Mr. Orban can access this route',
+      });
+    }
+
+    next();
+  };
+};
+
+module.exports = { protect, authorize, authorizeDirectorIdentity };

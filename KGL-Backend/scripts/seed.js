@@ -11,9 +11,13 @@ const mongoUri = process.env.MONGO_URI || 'mongodb://localhost:27017/karibu-proj
 
 const users = [
   {
+    // use a single-word username for the director so login is straightforward.
+    // registration and login logic strip spaces, so "Director" or "Mr Orban"
+    // would both normalize to "director" anyway, but an explicit alias
+    // reduces confusion.
     username: 'director',
     password: 'Director@123',
-    fullName: 'KGL Director',
+    fullName: 'Mr. Orban',
     role: 'Director',
   },
   {
@@ -49,26 +53,34 @@ const users = [
 async function seedUsers() {
   try {
     await mongoose.connect(mongoUri);
+    console.log(`Successfully connected to MongoDB at: ${mongoUri}`);
 
+    console.log('Starting user seeding process...');
     for (const entry of users) {
-      const hashedPassword = await bcrypt.hash(entry.password, 10);
+      try {
+        const username = entry.username.toLowerCase();
 
-      const update = {
-        username: entry.username,
-        password: hashedPassword,
-        fullName: entry.fullName,
-        role: entry.role,
-      };
+        // Delete all potential duplicates for the user to ensure a clean slate.
+        await User.deleteMany({ username: { $regex: new RegExp(`^${username}$`, 'i') } });
 
-      if (entry.role !== 'Director') {
-        update.branch = entry.branch;
+        // Create a fresh, clean user record with a hashed password.
+        const hashedPassword = await bcrypt.hash(entry.password, 10);
+        const newUser = {
+          username: username,
+          password: hashedPassword,
+          fullName: entry.fullName,
+          role: entry.role,
+        };
+
+        if (entry.role !== 'Director') {
+          newUser.branch = entry.branch;
+        }
+
+        const createdUser = await User.create(newUser);
+        console.log(`- Successfully created user: ${createdUser.username}`);
+      } catch (userError) {
+        console.error(`- FAILED to create user: ${entry.username}. Reason:`, userError.message);
       }
-
-      await User.findOneAndUpdate(
-        { username: entry.username },
-        update,
-        { upsert: true, new: true, setDefaultsOnInsert: true }
-      );
     }
 
     console.log('User seeding complete. Credentials:');

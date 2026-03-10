@@ -4,16 +4,6 @@ const Produce = require('../models/Produce');
 
 exports.getDirectorReport = async (req, res) => {
     try {
-        const fullName = (req.user.fullName || '').trim().toLowerCase();
-        const username = (req.user.username || '').trim().toLowerCase();
-        const isMrOrban = fullName === 'mr. orban' || fullName === 'mr orban' || username === 'orban';
-
-        if (!isMrOrban) {
-            return res.status(403).json({
-                message: 'Only the director Mr. Orban can view this report',
-            });
-        }
-
         // 1. Aggregate Total Cash Sales by Branch
         const salesReport = await Sale.aggregate([
             {
@@ -66,7 +56,7 @@ exports.getDirectorReport = async (req, res) => {
         res.status(200).json({
             businessName: "Karibu Groceries LTD",
             generatedAt: new Date(),
-            director: "Mr. Orban",
+            director: req.user.fullName || "Mr. Orban",
             totals,
             salesSummary: salesReport,
             creditSummary: creditReport,

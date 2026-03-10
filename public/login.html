@@ -15,7 +15,7 @@
     <div class="left">
       <div class="branding">
         <div class="logo">
-           <img src="/images/kgl.log-Photoroom.png" width="200" height="100" alt="logo">
+           <img src="/images/kgl.log-Photoroom.png" width="200" height="150" alt="logo">
         </div>
 
         <h1>Karibu Groceries LTD</h1>
@@ -50,10 +50,15 @@
 
         <form id="loginForm" method="post">
           <label for="username">Username</label>
-          <input type="text" id="username" placeholder="Enter your username" required>
+          <input type="text" id="username" placeholder="Enter your username (e.g. manager.maganjo, maganjo, or director)" required>
 
           <label for="password">Password</label>
-          <input type="password" id="password" placeholder=".........." required>
+          <div class="password-field">
+            <input type="password" id="password" placeholder=".........." required>
+            <button type="button" id="togglePasswordBtn" class="password-toggle" aria-label="Show password">
+              <i data-lucide="eye"></i>
+            </button>
+          </div>
         
           <button type="submit" id="loginBtn">Sign In</button>
            <div class="form-meta">

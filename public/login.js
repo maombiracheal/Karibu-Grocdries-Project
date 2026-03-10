@@ -90,6 +90,7 @@ document.addEventListener('DOMContentLoaded', () => {
   const passwordInput = document.getElementById('password');
   const loginBtn = document.getElementById('loginBtn');
   const forgotPasswordLink = document.getElementById('forgotPasswordLink');
+  const togglePasswordBtn = document.getElementById('togglePasswordBtn');
 
   // Abort setup if expected form elements are not present.
   if (!loginForm || !usernameInput || !passwordInput || !loginBtn) {
@@ -99,7 +100,19 @@ document.addEventListener('DOMContentLoaded', () => {
   if (forgotPasswordLink) {
     forgotPasswordLink.addEventListener('click', (event) => {
       event.preventDefault();
-      showError('Please contact the system administrator to reset your password.');
+      window.alert('Contact the director to change password.');
+    });
+  }
+
+  if (togglePasswordBtn) {
+    togglePasswordBtn.addEventListener('click', () => {
+      const isPassword = passwordInput.type === 'password';
+      passwordInput.type = isPassword ? 'text' : 'password';
+      togglePasswordBtn.setAttribute('aria-label', isPassword ? 'Hide password' : 'Show password');
+      togglePasswordBtn.innerHTML = `<i data-lucide="${isPassword ? 'eye-off' : 'eye'}"></i>`;
+      if (window.lucide && typeof window.lucide.createIcons === 'function') {
+        window.lucide.createIcons();
+      }
     });
   }
 

@@ -138,6 +138,36 @@ input {
   font-size: 14px;
 }
 
+.password-field {
+  position: relative;
+}
+
+.password-field input {
+  padding-right: 48px;
+}
+
+.password-toggle {
+  position: absolute;
+  top: 0;
+  right: 0;
+  width: 44px;
+  height: 44px;
+  border: 0;
+  background: transparent;
+  color: #5c6b64;
+  cursor: pointer;
+}
+
+.password-toggle:hover {
+  background: transparent;
+  color: #1a3d2e;
+}
+
+.password-toggle svg {
+  width: 18px;
+  height: 18px;
+}
+
 /* Inline row for secondary form actions like forgot password. */
 .form-meta {
   display: flex;

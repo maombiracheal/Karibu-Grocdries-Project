@@ -3,61 +3,70 @@ const router = express.Router();
 const User = require('../models/User');
 const bcrypt = require('bcryptjs');
 const jwt = require('jsonwebtoken');
+const { protect, authorize } = require('../middleware/auth');
 
-// POST: Register a new user (Manager or Sales Agent)
-router.post('/signup', async (req, res) => {
+router.get('/all', protect, authorize('Director'), async (req, res) => {
     try {
-        const { username, password, role, branch, fullName } = req.body;
+        const users = await User.find().select('-password').sort({ createdAt: -1, fullName: 1 });
+        res.status(200).json(users);
+    } catch (error) {
+        res.status(500).json({ error: error.message });
+    }
+});
 
-        // Hash the password for security
+router.post('/create', protect, authorize('Director'), async (req, res) => {
+    try {
+        let { username, password, role, branch, fullName } = req.body;
+
+        if (!username || !password || !role || !fullName) {
+            return res.status(400).json({ error: 'username, password, role, and fullName are required' });
+        }
+
+        username = username.toLowerCase();
+
+        const existingUser = await User.findOne({ username });
+        if (existingUser) {
+            return res.status(400).json({ error: 'Username already exists' });
+        }
+
         const hashedPassword = await bcrypt.hash(password, 10);
-
         const newUser = new User({
             username,
             password: hashedPassword,
-            role,   // Director, Manager, or Sales Agent 
-            branch, // Maganjo or Matugga 
+            role,
+            branch,
             fullName
         });
 
         await newUser.save();
-        res.status(201).json({ message: "User created successfully" });
+        res.status(201).json({
+            message: "User created successfully",
+            user: {
+                id: newUser._id,
+                username: newUser.username,
+                fullName: newUser.fullName,
+                role: newUser.role,
+                branch: newUser.branch
+            }
+        });
     } catch (error) {
         res.status(400).json({ error: error.message });
     }
 });
 
-// POST: Login
-router.post('/login', async (req, res) => {
+router.delete('/:id', protect, authorize('Director'), async (req, res) => {
     try {
-        const { username, password } = req.body;
-        
-        // Find user by username
-        const user = await User.findOne({ username });
-        if (!user) return res.status(404).json({ message: "User not found" });
-        console.log(user)
+        const userToDelete = await User.findById(req.params.id);
+        if (!userToDelete) {
+            return res.status(404).json({ error: 'User not found' });
+        }
 
+        if (String(userToDelete._id) === String(req.user._id)) {
+            return res.status(400).json({ error: 'Director cannot delete the currently logged in account' });
+        }
 
-        // Check password
-        const isMatch = await bcrypt.compare(password, user.password);
-        if (!isMatch) return res.status(400).json({ message: "Invalid credentials" });
-
-        // Create JWT Token with role and branch permissions
-        const token = jwt.sign(
-            { id: user._id, role: user.role, branch: user.branch },
-            process.env.JWT_SECRET ,
-            { expiresIn: '8h' }
-        );
-
-        res.status(200).json({
-            token,
-            user: {
-                id: user._id,
-                username: user.username,
-                role: user.role,
-                branch: user.branch
-            }
-        });
+        await User.findByIdAndDelete(req.params.id);
+        res.status(200).json({ message: 'User deleted successfully' });
     } catch (error) {
         res.status(500).json({ error: error.message });
     }

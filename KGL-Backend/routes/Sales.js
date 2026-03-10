@@ -4,8 +4,20 @@ const Sale = require('../models/Sale');
 const Produce = require('../models/Produce');
 const { protect, authorize } = require('../middleware/auth');
 
+// GET: Recent sales for the logged-in branch
+router.get('/recent', protect, authorize('Manager', 'Sales Agent', 'Director'), async (req, res) => {
+  try {
+    const branchFilter = req.user.role === 'Director' ? {} : { branch: req.user.branch };
+    const query = Sale.find(branchFilter).sort({ dateTime: -1 });
+    const sales = req.user.role === 'Director' ? await query : await query.limit(20);
+    res.json(sales);
+  } catch (error) {
+    res.status(500).json({ error: error.message });
+  }
+});
+
 // POST: Record a cash sale
-router.post('/cash', protect, authorize('Manager'), async (req, res) => {
+router.post('/cash', protect, authorize('Manager', 'Sales Agent'), async (req, res) => {
   try {
     const { produceName, tonnageKg, buyerName } = req.body;
     const branch = req.user.branch;
